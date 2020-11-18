@@ -1,81 +1,22 @@
-class Carro{
-
-  private modelo: string;
-  public numeroDePortas: number;
-  private velocidade: number = 0;
-
-  constructor(modelo: string, numeroDePortas: number) {
-    this.modelo = modelo;
-    this.numeroDePortas = numeroDePortas;
-  }
-
-  public acelerar(): void{
-    this.velocidade = this.velocidade + 10;
-  }
-
-  public para(): void{
-    this.velocidade = 0;
-  }
-
-  public velocidadeAtual(): number{
-    return this.velocidade;
-  }
-
-  public ModeloCarro() {
-    return this.modelo; 
-  }
-}
+import { Pessoa } from './Pessoa';
+import { Carro } from "./Carro";
+import { Concessionaria } from "./Concessionaria";
 
 
-class Concessionaria {
-  private endereco: string
-  private listaDeCarros: Array<Carro>
+let carro1 = new Carro('Ferrari', 4);
+let carro2 = new Carro('Mercedes', 4);
+let carro3 = new Carro('Hyndai', 4);
 
-  constructor(endereco: string, listaDeCarros: Array<Carro>) {
-    this.endereco = endereco;
-    this.listaDeCarros = listaDeCarros;
-  }
+let listaDeCarros : Carro[] = [carro1, carro2, carro3];
 
-  public fornecerEndreco(): string{
-    return this.endereco;
-  }
-
-  public mostrarListaDeCarros(): Array<Carro>{
-    return this.listaDeCarros;
-  }
-
-}
-
-
-class Pessoa{
-  private cpf: string;
-  public nome: string;
-  private numero: number;
-  public carro: string;
-
-  constructor(cpf: string, nome: string, numero: number, carro: string) {
-    this.cpf = cpf;
-    this.nome = nome;
-    this.numero = numero;
-    this.carro = carro;
-  }
+let concessionaria = new Concessionaria('Av da maldade', listaDeCarros);
   
-  public dizeCarro(): string {
-    return this.carro
+let cliente = new Pessoa('João', '216411315', 56745649,'Fox');
+
+concessionaria.mostrarListaDeCarros().map((carro: Carro)=>{
+  if(carro['modelo'] == cliente.dizerCarro()){
+    cliente.ComprarCarro(carro);
   }
+});
 
-  public Nome(): string{
-    return this.nome;
-  }
-}
-
-let carro1 = new Carro('Fox', 4);
-let carro2 = new Carro('Fiesta',4);
-let carro3 = new Carro('Ferrari', 4);
-let carro4 = new Carro('Mercedes', 4);
-
-let listaDeCarros: Carro[] = [carro1, carro2, carro3];
-
-let concessionaria = new Concessionaria('Av Paulista', listaDeCarros);
-
-console.log(concessionaria.mostrarListaDeCarros());
+console.log(cliente.dizerCarro());
